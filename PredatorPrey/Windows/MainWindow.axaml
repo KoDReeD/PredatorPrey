@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="480"
+        MinWidth="800" MinHeight="480"
+        x:Class="PredatorPrey.MainWindow"
+        Title="PredatorPrey">
+
+  <Grid RowDefinitions="50,*, Auto" ColumnDefinitions="*,*">
+
+    <!-- верхняя строка -->
+    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center"
+                Margin="0,10,0,0" Grid.ColumnSpan="2">
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">жертв =</TextBlock>
+        <TextBox Text="{Binding Prey}"></TextBox>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">хищников =</TextBlock>
+        <TextBox Text="{Binding Predator}"></TextBox>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">E =</TextBlock>
+        <TextBox Text="{Binding E}"></TextBox>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">a =</TextBlock>
+        <TextBox Text="{Binding a}"></TextBox>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">o =</TextBlock>
+        <TextBox Text="{Binding o}"></TextBox>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <TextBlock VerticalAlignment="Center">b =</TextBlock>
+        <TextBox Text="{Binding b}"></TextBox>
+      </StackPanel>
+    </StackPanel>
+
+    <!-- главная часть -->
+    <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,0,0,0">
+      <Grid Column="0" ColumnDefinitions="Auto,*,*" RowDefinitions="Auto,*" Margin="0,10,0,0">
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Grid.Column="0" Text="Поколение"></TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Grid.Column="1" Text="Жертвы"></TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Grid.Column="2" Text="Хищники"></TextBlock>
+
+        <ListBox Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Name="ListBoxData" Height="350" Margin="0,5,0,0">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid ColumnDefinitions="Auto,*,*">
+                <TextBlock HorizontalAlignment="Center" Grid.Column="0" Text="{Binding RowNum}"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" Grid.Column="1" Text="{Binding PreyNum}"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" Grid.Column="2" Text="{Binding PredatorNum}"></TextBlock>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+      </Grid>
+
+    </StackPanel>
+
+    <ScottPlot:AvaPlot Grid.Column="1" Grid.Row="1" Name="GraphicsPlot" />
+
+    <StackPanel Grid.Column="0" Grid.Row="2" Spacing="20" Margin="0,0,0,10"
+                Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button Click="Button_OnClick">Построить график цикла</Button>
+      <Button Click="Button_Clear_OnClick">Очистить график</Button>
+    </StackPanel>
+  </Grid>
+</Window>
